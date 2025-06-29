@@ -1,103 +1,81 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import Image from 'next/image';
+import Link from 'next/link';
+
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <main className="min-h-screen font-poppins bg-white text-black dark:bg-[#0b1222] dark:text-white transition-colors duration-300">
+      {/* Hero Section */}
+      <section className="py-16 px-8 grid md:grid-cols-2 items-center gap-12">
+        <div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Best Learning <span className="text-yellow-400">Education Platform</span> in The World
+          </h1>
+          <p className="text-gray-700 dark:text-gray-300 mb-6">
+            Learn topics easier, smarter, and with AI-generated meme flashcards. Improve recall,
+            reduce boredom, and make concepts stick forever.
+          </p>
+          <div className="flex space-x-4">
+            <Link
+              href="/auth"
+              className="btn-primary bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg"
+            >
+              Register
+            </Link>
+            <Link
+              href="/auth"
+              className="btn-secondary bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-black dark:text-white font-medium py-2 px-6 rounded-lg"
+            >
+              Login
+            </Link>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <div className="relative">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/images/hero.jpg"
+            alt="Students learning"
+            width={500}
+            height={350}
+            className="rounded-xl"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <div className="absolute bottom-4 left-4 bg-white/90 dark:bg-black/70 backdrop-blur-md p-4 rounded-xl shadow-md">
+            <ul className="list-disc ml-4 text-sm">
+              <li>🎓 Get AI Generated FlashCards</li>
+              <li>📝 One place for your Notes</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="bg-[#f9fafb] dark:bg-[#141b2d] py-16 px-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
+          <div>
+            <h2 className="text-3xl font-bold text-yellow-500 mb-4">Why Choose Us</h2>
+            <p className="text-gray-800 dark:text-gray-300 leading-relaxed">
+              Choosing <span className="font-semibold text-blue-600 dark:text-blue-400">PadhAI</span> is the best option as we offer different features like getting AI Generated Flashcards which makes you learn any difficult topic in one go. We also offer the ability to store notes and access them anytime and anywhere.
+            </p>
+          </div>
+          <div className="bg-gray-200 dark:bg-gray-700 h-60 w-full rounded-xl flex items-center justify-center text-gray-500 dark:text-white">
+            Any Good Image can paste here
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#0f172a] text-white py-6 mt-12">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm">&copy; 2025 PadhAI. All rights reserved.</p>
+          <div className="flex space-x-6">
+            <Link href="#" className="text-sm hover:underline">Home</Link>
+            <Link href="#" className="text-sm hover:underline">Support</Link>
+            <Link href="#" className="text-sm hover:underline">Company</Link>
+            <Link href="#" className="text-sm hover:underline">Legal</Link>
+            <Link href="#" className="text-sm hover:underline">Join Us</Link>
+          </div>
+        </div>
       </footer>
-    </div>
+    </main>
   );
 }
