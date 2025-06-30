@@ -33,7 +33,7 @@ export default function HomePage() {
         </div>
         <div className="relative">
           <Image
-            src="/images/hero.jpg"
+            src="/images/hero.jpeg"
             alt="Students learning"
             width={500}
             height={350}
@@ -57,9 +57,15 @@ export default function HomePage() {
               Choosing <span className="font-semibold text-blue-600 dark:text-blue-400">PadhAI</span> is the best option as we offer different features like getting AI Generated Flashcards which makes you learn any difficult topic in one go. We also offer the ability to store notes and access them anytime and anywhere.
             </p>
           </div>
-          <div className="bg-gray-200 dark:bg-gray-700 h-60 w-full rounded-xl flex items-center justify-center text-gray-500 dark:text-white">
-            Any Good Image can paste here
-          </div>
+         <div className="relative h-60 w-full rounded-xl overflow-hidden">
+  <Image
+    src="/images/why.jpg"
+    alt="Download visual"
+    fill
+    className="object-cover rounded-xl"
+    quality={100}
+  />
+</div>
         </div>
       </section>
 

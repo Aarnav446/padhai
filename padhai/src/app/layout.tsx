@@ -3,7 +3,7 @@ import './globals.css';
 import { ReactNode } from 'react';
 import { ThemeProvider } from 'next-themes';
 import { Poppins } from 'next/font/google';
-import NavBar from '@/components/ui/NavBar';
+import NavBar from '@/components/layout/NavBar';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -18,8 +18,11 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={poppins.variable}>
-      <body className="font-poppins bg-white text-black dark:bg-[#0b1222] dark:text-white transition-colors duration-300">
+    <html lang="en" suppressHydrationWarning>
+
+      
+     <body className={`${poppins.className} pt-16 bg-white dark:bg-black`}>
+
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <NavBar />
           <main>{children}</main>

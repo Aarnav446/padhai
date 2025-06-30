@@ -1,4 +1,43 @@
-/* src/app/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------------
+   🌐 Base Styles
+----------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply transition-colors duration-300;
+  }
+
+  body.dark {
+    @apply bg-black text-white;
+  }
+}
+
+/* ----------------------------
+   🎨 Custom Utilities
+----------------------------- */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
@@ -6,7 +45,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Styles */
-body {
-  @apply bg-gray-50 dark:bg-gray-900;
+/* Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply transition-colors duration-300 font-poppins;
+  }
+
+  body.dark {
+    @apply bg-black text-white;
+  }
+}
+
+/* FLIP CARD STYLES */
+.perspective {
+  perspective: 1000px;
+}
+
+.card-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.group:hover .card-container {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+}
+
+.card-front {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background-color: white;
 }

@@ -1,54 +1,53 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import axios from "axios";
 
-const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GEMINI_API_KEY!);
+export async function generateFlashcards(text: string) {
+  const prompt = `
+You are a flashcard generator bot.
 
-export async function generateMemeFlashcard(topic: string) {
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+🎯 Respond in ONLY this JSON format (no markdown, no explanation):
 
-  const prompt = `Create a funny, educational meme about ${topic}. 
-  Return JSON with:
-  - title: Short catchy title
-  - memeText: Funny text for the meme
-  - explanation: Educational explanation (2-3 sentences)
-  - imagePrompt: Description for meme image
-  
-  Make it educational but humorous.`;
-
-  try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    
-    // Parse the JSON response
-    const memeData = JSON.parse(text);
-    return memeData;
-  } catch (error) {
-    console.error('Error generating meme:', error);
-    return null;
+{
+  "flashcards": [
+    { "question": "What is ...?", "answer": "..." },
+    { "question": "...", "answer": "..." }
+  ],
+  "meme": {
+    "template": "Grumpy Cat",
+    "captionTop": "Studying hard?",
+    "captionBottom": "Too bad, here's more!"
   }
 }
 
-export async function generateQuizQuestions(topic: string, count: number = 5) {
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
-
-  const prompt = `Generate ${count} multiple choice questions about ${topic}.
-  Return JSON array with each question having:
-  - question: The question text
-  - options: Array of 4 possible answers
-  - correctAnswer: Index of correct answer (0-3)
-  - explanation: Why the answer is correct
-  - roast: Funny roast for wrong answers
-  
-  Make questions educational but fun.`;
+Text:
+"""${text}"""
+`;
 
   try {
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    
-    return JSON.parse(text);
-  } catch (error) {
-    console.error('Error generating quiz:', error);
-    return [];
+    const res = await axios.post(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${process.env.NEXT_PUBLIC_GEMINI_API_KEY}`,
+      {
+        contents: [{ role: "user", parts: [{ text: prompt }] }],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const raw = res.data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!raw) throw new Error("No response text from Gemini");
+
+    const jsonStart = raw.indexOf("{");
+    const jsonEnd = raw.lastIndexOf("}");
+    const clean = raw.slice(jsonStart, jsonEnd + 1);
+    return JSON.parse(clean);
+
+  } catch (error: any) {
+    console.error(
+      "❌ Gemini Error:",
+      JSON.stringify(error?.response?.data || error.message || error, null, 2)
+    );
+    throw new Error("Failed to generate flashcards.");
   }
 }
